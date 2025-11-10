@@ -45,17 +45,20 @@ $chamados = $stmt_chamados->fetchAll();
     <div class="card-body">
         <div class="row">
             <div class="col-md-4"><strong>Unidade:</strong> <?= htmlspecialchars($ativo['nome_unidade']) ?></div>
+            <div class="col-md-4"><strong>Tipo:</strong> <?= htmlspecialchars($ativo['tipo_ativo']) ?></div>
+            <div class="col-md-4"><strong>Status:</strong> <?= htmlspecialchars($ativo['status_ativo']) ?></div>
             <div class="col-md-4"><strong>IP:</strong> <?= htmlspecialchars($ativo['ip_address']) ?></div>
             <div class="col-md-4"><strong>ID Remoto:</strong> <?= htmlspecialchars($ativo['remote_id']) ?></div>
             <div class="col-md-4"><strong>Sistema:</strong> <?= htmlspecialchars($ativo['operating_system']) ?></div>
-            <div class="col-md-4"><strong>Status:</strong> <?= htmlspecialchars($ativo['status_ativo']) ?></div>
             <div class="col-md-12 mt-2"><strong>Descrição:</strong> <?= nl2br(htmlspecialchars($ativo['descricao'])) ?></div>
         </div>
     </div>
 </div>
 
 <h3>Histórico de Ocorrências (<?= count($chamados) ?>)</h3>
+
 <a href="../chamados/novo.php?id_ativo=<?= $id_ativo ?>" class="btn btn-primary mb-3">Abrir Novo Chamado para este Ativo</a>
+
 
 <div class="accordion" id="historicoChamados">
     <?php foreach ($chamados as $index => $chamado): ?>
@@ -66,7 +69,7 @@ $chamados = $stmt_chamados->fetchAll();
                     <span class="badge bg-dark me-2">#<?= $chamado['id_chamado'] ?></span>
                     <span class="me-3"><?= date('d/m/Y H:i', strtotime($chamado['data_abertura'])) ?></span>
                     <strong class="me-3"><?= htmlspecialchars($chamado['status_chamado']) ?></strong>
-                    <span><?= htmlspecialchars($chamado['problema_relatado']) ?></span>
+                    <span><?= htmlspecialchars(substr($chamado['problema_relatado'], 0, 100)) . '...' ?></span>
                 </button>
             </h2>
             <div id="collapse-<?= $index ?>" class="accordion-collapse collapse <?= ($index == 0) ? 'show' : '' ?>" 

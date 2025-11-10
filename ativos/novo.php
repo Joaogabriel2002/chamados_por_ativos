@@ -18,7 +18,6 @@ $unidades = $stmt_unidades->fetchAll();
         <label for="nome_ativo" class="form-label">Nome do Ativo (Ex: Caixa 01, PC-Financeiro)</label>
         <input type="text" class="form-control" id="nome_ativo" name="nome_ativo" required>
     </div>
-
     <div class="col-md-6">
         <label for="id_unidade_fk" class="form-label">Unidade (Local)</label>
         <select id="id_unidade_fk" name="id_unidade_fk" class="form-select" required>
@@ -35,17 +34,28 @@ $unidades = $stmt_unidades->fetchAll();
         <label for="ip_address" class="form-label">Endereço IP</label>
         <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="192.168.1.10">
     </div>
-
     <div class="col-md-4">
         <label for="remote_id" class="form-label">ID Acesso Remoto (AnyDesk)</label>
         <input type="text" class="form-control" id="remote_id" name="remote_id" placeholder="123 456 789">
     </div>
-
     <div class="col-md-4">
         <label for="operating_system" class="form-label">Sistema Operacional</label>
         <input type="text" class="form-control" id="operating_system" name="operating_system" placeholder="Windows 10 Pro">
     </div>
 
+    <div class="col-md-6">
+        <label for="tipo_ativo" class="form-label">Tipo de Ativo</label>
+        <select id="tipo_ativo" name="tipo_ativo" class="form-select">
+            <option value="" selected disabled>-- Selecione o tipo --</option>
+            <option value="PDV">PDV (Ponto de Venda)</option>
+            <option value="Notebook">Notebook</option>
+            <option value="Desktop">Desktop</option>
+            <option value="Servidor">Servidor</option>
+            <option value="Impressora">Impressora</option>
+            <option value="Roteador">Roteador</option>
+            <option value="Outro">Outro</option>
+        </select>
+    </div>
     <div class="col-md-12">
         <label for="descricao" class="form-label">Descrição / Observações</label>
         <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Ex: PC HP 8GB RAM, SSD 240GB..."></textarea>

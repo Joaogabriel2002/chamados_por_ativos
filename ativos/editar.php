@@ -3,16 +3,15 @@
 require_once '../includes/header.php';
 require_once '../config/conexao.php';
 
-// 2. Verificar se o ID foi passado pela URL (GET)
+// 2. Verificar o ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo "<div class->alert alert-danger'>ID do ativo inválido.</div>";
+    echo "<div class='alert alert-danger'>ID do ativo inválido.</div>";
     require_once '../includes/footer.php';
-    exit; // Para a execução
+    exit; 
 }
-
 $id_ativo = $_GET['id'];
 
-// 3. Buscar os dados do ativo específico
+// 3. Buscar os dados do ativo
 $stmt_ativo = $pdo->prepare("SELECT * FROM ativos WHERE id_ativo = ?");
 $stmt_ativo->execute([$id_ativo]);
 $ativo = $stmt_ativo->fetch();
@@ -23,7 +22,7 @@ if (!$ativo) {
     exit;
 }
 
-// 4. Buscar as unidades para popular o <select>
+// 4. Buscar as unidades
 $stmt_unidades = $pdo->query("SELECT * FROM unidades ORDER BY nome_unidade");
 $unidades = $stmt_unidades->fetchAll();
 ?>
@@ -40,7 +39,6 @@ $unidades = $stmt_unidades->fetchAll();
         <input type="text" class="form-control" id="nome_ativo" name="nome_ativo" 
                value="<?= htmlspecialchars($ativo['nome_ativo']) ?>" required>
     </div>
-
     <div class="col-md-6">
         <label for="id_unidade_fk" class="form-label">Unidade (Local)</label>
         <select id="id_unidade_fk" name="id_unidade_fk" class="form-select" required>
@@ -59,19 +57,31 @@ $unidades = $stmt_unidades->fetchAll();
         <input type="text" class="form-control" id="ip_address" name="ip_address" 
                value="<?= htmlspecialchars($ativo['ip_address']) ?>">
     </div>
-
     <div class="col-md-4">
         <label for="remote_id" class="form-label">ID Acesso Remoto (AnyDesk)</label>
         <input type="text" class="form-control" id="remote_id" name="remote_id" 
                value="<?= htmlspecialchars($ativo['remote_id']) ?>">
     </div>
-
     <div class="col-md-4">
         <label for="operating_system" class="form-label">Sistema Operacional</label>
         <input type="text" class="form-control" id="operating_system" name="operating_system" 
                value="<?= htmlspecialchars($ativo['operating_system']) ?>">
     </div>
     
+    <div class="col-md-6">
+        <label for="tipo_ativo" class="form-label">Tipo de Ativo</label>
+        <select id="tipo_ativo" name="tipo_ativo" class="form-select">
+            <option value="">-- Selecione o tipo --</option>
+            <?php $tipo_selecionado = $ativo['tipo_ativo']; ?>
+            <option value="PDV" <?= ($tipo_selecionado == 'PDV') ? 'selected' : '' ?>>PDV (Ponto de Venda)</option>
+            <option value="Notebook" <?= ($tipo_selecionado == 'Notebook') ? 'selected' : '' ?>>Notebook</option>
+            <option value="Desktop" <?= ($tipo_selecionado == 'Desktop') ? 'selected' : '' ?>>Desktop</option>
+            <option value="Servidor" <?= ($tipo_selecionado == 'Servidor') ? 'selected' : '' ?>>Servidor</option>
+            <option value="Impressora" <?= ($tipo_selecionado == 'Impressora') ? 'selected' : '' ?>>Impressora</option>
+            <option value="Roteador" <?= ($tipo_selecionado == 'Roteador') ? 'selected' : '' ?>>Roteador</option>
+            <option value="Outro" <?= ($tipo_selecionado == 'Outro') ? 'selected' : '' ?>>Outro</option>
+        </select>
+    </div>
     <div class="col-md-6">
         <label for="status_ativo" class="form-label">Status</label>
         <select id="status_ativo" name="status_ativo" class="form-select" required>
