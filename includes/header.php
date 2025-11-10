@@ -21,15 +21,14 @@ $base_url = '/sistema_chamados';
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="<?= $base_url ?>/unidades/">Unidades</a>
+          <a class="nav-link" href="<?= $base_url ?>/chamados/">Chamados</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?= $base_url ?>/ativos/">Ativos</a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link" href="<?= $base_url ?>/categorias/">Categorias</a> </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= $base_url ?>/chamados/">Chamados</a>
+          <a class="nav-link" href="<?= $base_url ?>/configuracoes.php">Configurações</a>
         </li>
       </ul>
     </div>
